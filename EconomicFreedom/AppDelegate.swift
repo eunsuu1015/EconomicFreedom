@@ -2,7 +2,7 @@
 //  AppDelegate.swift
 //  EconomicFreedom
 //
-//  Created by Authlabs on 2022/02/25.
+//  Created by EunSu on 2022/02/25.
 //
 
 import UIKit
