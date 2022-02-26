@@ -68,6 +68,8 @@
 		2DC216C227C8F7A7003E2E91 /* close.png in Resources */ = {isa = PBXBuildFile; fileRef = 2DC2169427C8F7A7003E2E91 /* close.png */; };
 		2DC216CF27C90337003E2E91 /* EconomicFreedomTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DC216CE27C90337003E2E91 /* EconomicFreedomTests.swift */; };
 		2DC216D627C90C95003E2E91 /* GoalVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DC216D527C90C95003E2E91 /* GoalVC.swift */; };
+		FA55F8D827CA53D000A2A423 /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA55F8D727CA53D000A2A423 /* Data.swift */; };
+		FA55F8DA27CA5B5100A2A423 /* UserDefaultsMgr.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA55F8D927CA5B5100A2A423 /* UserDefaultsMgr.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -146,6 +148,8 @@
 		2DC216CC27C90337003E2E91 /* EconomicFreedomTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EconomicFreedomTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2DC216CE27C90337003E2E91 /* EconomicFreedomTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EconomicFreedomTests.swift; sourceTree = "<group>"; };
 		2DC216D527C90C95003E2E91 /* GoalVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalVC.swift; sourceTree = "<group>"; };
+		FA55F8D727CA53D000A2A423 /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
+		FA55F8D927CA5B5100A2A423 /* UserDefaultsMgr.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsMgr.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -187,6 +191,7 @@
 		2DC2163527C88693003E2E91 /* EconomicFreedom */ = {
 			isa = PBXGroup;
 			children = (
+				FA55F8D627CA53C400A2A423 /* Data */,
 				2DC216C327C8F850003E2E91 /* Common */,
 				2DC2166427C8F7A6003E2E91 /* Res */,
 				2DC2164A27C88869003E2E91 /* ViewController */,
@@ -295,8 +300,9 @@
 		2DC216C327C8F850003E2E91 /* Common */ = {
 			isa = PBXGroup;
 			children = (
-				2DC2166027C8F4FC003E2E91 /* Constants.swift */,
 				2DC216C427C8F88C003E2E91 /* EconomicFreedom-Bridging-Header.h */,
+				2DC2166027C8F4FC003E2E91 /* Constants.swift */,
+				FA55F8D927CA5B5100A2A423 /* UserDefaultsMgr.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -307,6 +313,14 @@
 				2DC216CE27C90337003E2E91 /* EconomicFreedomTests.swift */,
 			);
 			path = EconomicFreedomTests;
+			sourceTree = "<group>";
+		};
+		FA55F8D627CA53C400A2A423 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				FA55F8D727CA53D000A2A423 /* Data.swift */,
+			);
+			path = Data;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -459,9 +473,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				2DC2164E27C888A4003E2E91 /* InputVC.swift in Sources */,
+				FA55F8DA27CA5B5100A2A423 /* UserDefaultsMgr.swift in Sources */,
 				2DC216D627C90C95003E2E91 /* GoalVC.swift in Sources */,
 				2DC2165427C888D5003E2E91 /* ExplainVC.swift in Sources */,
 				2DC2166327C8F666003E2E91 /* Log.swift in Sources */,
+				FA55F8D827CA53D000A2A423 /* Data.swift in Sources */,
 				2DC2165227C888BE003E2E91 /* SettingVC.swift in Sources */,
 				2DC2163727C88693003E2E91 /* AppDelegate.swift in Sources */,
 				2DC2165027C888AC003E2E91 /* MemoVC.swift in Sources */,

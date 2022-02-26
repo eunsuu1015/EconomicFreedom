@@ -7,7 +7,7 @@
 
 import UIKit
 
-class InputVC: UIViewController, TopViewDelegate {
+class InputVC: UIViewController {
     
     @IBOutlet weak var tfCapital: UITextField!      // 지금까지 모아둔 돈
     @IBOutlet weak var tfSaving: UITextField!       // 저축액/월
@@ -138,16 +138,22 @@ class InputVC: UIViewController, TopViewDelegate {
     @IBAction func btnOkClick(_ sender: Any) {
     }
     
-    // MARK: TopView Delegate
+}
+
+// MARK: - TopViewDelegate
+
+extension InputVC: TopViewDelegate {
     
     func btnleft1Click() {
-        Log.d("test")
+        
     }
     
     func btnRight1Click() {
+        
     }
     
     func btnRight2Click() {
+        
     }
     
 }
