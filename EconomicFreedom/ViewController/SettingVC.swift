@@ -8,21 +8,46 @@
 import UIKit
 
 class SettingVC: UIViewController {
-
+    
+    @IBOutlet weak var topView: TopView!
+    @IBOutlet weak var labelAppVer: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        initTopView()
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    func initTopView() {
+        topView.delegate = self
+        topView.btnRight1.isHidden = true
+        topView.btnRight2.isHidden = true
     }
-    */
+    
+    @IBAction func btnColorClick(_ sender: Any) {
+    }
+    
+    @IBAction func btnExplainClick(_ sender: Any) {
+    }
+    
+    @IBAction func btnOpenSourceClick(_ sender: Any) {
+    }
+    
+}
 
+// MARK: - TopViewDelegate
+
+extension SettingVC: TopViewDelegate {
+    
+    func btnleft1Click() {
+        self.navigationController?.popViewController(animated: true)
+    }
+    
+    func btnRight1Click() {
+        
+    }
+    
+    func btnRight2Click() {
+        
+    }
+    
 }

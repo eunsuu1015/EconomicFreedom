@@ -7,23 +7,54 @@
 
 import UIKit
 
-class GoalVC: UIViewController {
 
+class GoalVC: UIViewController {
+    
+    @IBOutlet weak var topView: TopView!
+    @IBOutlet weak var tfAge: UITextField!
+    
+    let goalAge = "goalAge"
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        topView.delegate = self
+        topView.btnLeft1.isHidden = true
+        topView.btnRight2.isHidden = true
+        
+        let goal: String
+        goal = UserDefaultsMgr.get(key: goalAge)
+        if goal != "" {
+            tfAge.text = goal
+        }
+        
+    }
+
+    @IBAction func tfDidChange(_ sender: Any) {
+        Log.d("start")
+        if tfAge.text?.count != 0 {
+            UserDefaultsMgr.set(key: goalAge, value: tfAge.text!)
+        }
     }
     
+}
 
-    /*
-    // MARK: - Navigation
+// MARK: - TopViewDelegate
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+extension GoalVC: TopViewDelegate {
+    
+    func btnleft1Click() {
+        
     }
-    */
-
+    
+    func btnRight1Click() {
+        let storyboard = self.storyboard
+        guard let settingVC = storyboard?.instantiateViewController(withIdentifier: "SettingVC") else { return }
+        self.navigationController?.pushViewController(settingVC, animated: true)
+        
+    }
+    
+    func btnRight2Click() {
+        
+    }
 }

@@ -149,6 +149,9 @@ extension InputVC: TopViewDelegate {
     }
     
     func btnRight1Click() {
+        let storyboard = self.storyboard
+        guard let settingVC = storyboard?.instantiateViewController(withIdentifier: "SettingVC") else { return }
+        self.navigationController?.pushViewController(settingVC, animated: true)
         
     }
     

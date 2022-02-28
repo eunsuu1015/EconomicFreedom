@@ -914,7 +914,7 @@
                                                     <color key="titleColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="btnColorClick:" destination="drT-u0-Mwa" eventType="touchUpInside" id="M66-wW-Cng"/>
+                                                    <action selector="btnColorClick:" destination="drT-u0-Mwa" eventType="touchUpInside" id="F7H-3j-ykg"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -941,7 +941,7 @@
                                                     <color key="titleColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="btnExplainClick:" destination="drT-u0-Mwa" eventType="touchUpInside" id="9NR-rh-bEu"/>
+                                                    <action selector="btnExplainClick:" destination="drT-u0-Mwa" eventType="touchUpInside" id="chW-sQ-Z2o"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -992,7 +992,7 @@
                                                     <color key="titleColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="btnOpenSourceClick:" destination="drT-u0-Mwa" eventType="touchUpInside" id="Peo-v5-5se"/>
+                                                    <action selector="btnOpenSourceClick:" destination="drT-u0-Mwa" eventType="touchUpInside" id="h9M-xg-Gjj"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -1016,9 +1016,6 @@
                                                 <state key="normal" title="문의하기">
                                                     <color key="titleColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
-                                                <connections>
-                                                    <action selector="btnServiceCenterClick:" destination="drT-u0-Mwa" eventType="touchUpInside" id="LK3-qp-n0R"/>
-                                                </connections>
                                             </button>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -1202,7 +1199,7 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="labelAppVer" destination="Uyr-Wa-70h" id="ShG-iW-qvF"/>
+                        <outlet property="topView" destination="qMa-gP-utr" id="pYk-vo-bf5"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wyD-Xj-6FS" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -1475,6 +1472,7 @@
                     </tabBar>
                     <connections>
                         <segue destination="8Fd-Ju-O6R" kind="relationship" relationship="viewControllers" id="AFs-h3-qPI"/>
+                        <segue destination="7Cb-9F-bEg" kind="relationship" relationship="viewControllers" id="Rk6-nk-ja9"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Vog-vL-ytd" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -1484,13 +1482,13 @@
         <!--목표-->
         <scene sceneID="g2g-ge-euv">
             <objects>
-                <viewController storyboardIdentifier="GoalVC" id="7Cb-9F-bEg" customClass="GoalVC" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="GoalVC" id="7Cb-9F-bEg" customClass="GoalVC" customModule="EconomicFreedom" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="apE-sd-NaR">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" placeholder="몇" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="B9m-fw-g2F">
-                                <rect key="frame" x="167" y="407" width="50" height="32"/>
+                                <rect key="frame" x="167" y="382.5" width="50" height="32"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="32" id="bDV-c1-A9s"/>
                                     <constraint firstAttribute="width" constant="50" id="gK8-N9-Ggv"/>
@@ -1498,26 +1496,29 @@
                                 <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="27"/>
                                 <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                                <connections>
+                                    <action selector="tfDidChange:" destination="7Cb-9F-bEg" eventType="editingChanged" id="m4G-5N-zdr"/>
+                                </connections>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="나는" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PR6-B0-Wb5">
-                                <rect key="frame" x="187" y="329.5" width="40" height="27.5"/>
+                                <rect key="frame" x="187" y="305" width="40" height="27.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="23"/>
                                 <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="세에" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xsI-1u-UBx">
-                                <rect key="frame" x="222" y="409.5" width="40" height="27.5"/>
+                                <rect key="frame" x="222" y="385" width="40" height="27.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="23"/>
                                 <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="퇴사할래" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="877-MB-we0">
-                                <rect key="frame" x="167" y="489" width="80" height="27.5"/>
+                                <rect key="frame" x="167" y="464.5" width="80" height="27.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="23"/>
                                 <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EBg-WK-wb5">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EBg-WK-wb5" customClass="TopView" customModule="EconomicFreedom" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="120"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
@@ -1543,7 +1544,8 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="목표" image="goal.png" id="70g-bU-YGV"/>
                     <connections>
-                        <outlet property="tfAge" destination="B9m-fw-g2F" id="jNJ-gK-xpy"/>
+                        <outlet property="tfAge" destination="B9m-fw-g2F" id="hZZ-0w-eM6"/>
+                        <outlet property="topView" destination="EBg-WK-wb5" id="MfU-b9-xsA"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gZm-hT-Sv0" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

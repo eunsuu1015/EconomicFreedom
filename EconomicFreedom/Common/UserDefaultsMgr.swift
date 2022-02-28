@@ -7,29 +7,33 @@
 
 import Foundation
 
-// MARK: - get
+class UserDefaultsMgr {
+    
+    // MARK: - set
 
-func get(key: String, value: String) {
-    UserDefaults.standard.set(value, forKey: key)
-}
-
-func get(key: String, value: Int) {
-    UserDefaults.standard.set(value, forKey: key)
-}
-
-// MARK: - set
-
-func set(key: String) -> String {
-    return UserDefaults.standard.string(forKey: key) ?? ""
-}
-
-
-func set(key: String) -> Int {
-    return UserDefaults.standard.integer(forKey: key)
-}
-
-// MARK: - remove
-
-func remove(key: String) {
-    UserDefaults.standard.removeObject(forKey: key)
+    static func set(key: String, value: String) {
+        UserDefaults.standard.set(value, forKey: key)
+    }
+    
+    static func set(key: String, value: Int) {
+        UserDefaults.standard.set(value, forKey: key)
+    }
+    
+    // MARK: - get
+    
+    static func get(key: String) -> String {
+        return UserDefaults.standard.string(forKey: key) ?? ""
+    }
+    
+    
+    static func get(key: String) -> Int {
+        return UserDefaults.standard.integer(forKey: key)
+    }
+    
+    // MARK: - remove
+    
+    static func remove(key: String) {
+        UserDefaults.standard.removeObject(forKey: key)
+    }
+    
 }
