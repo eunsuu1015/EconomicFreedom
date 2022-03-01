@@ -42,12 +42,8 @@ extension SettingVC: TopViewDelegate {
         self.navigationController?.popViewController(animated: true)
     }
     
-    func btnRight1Click() {
-        
-    }
+    func btnRight1Click() {}
     
-    func btnRight2Click() {
-        
-    }
+    func btnRight2Click() {}
     
 }

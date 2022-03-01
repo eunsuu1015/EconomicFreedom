@@ -17,7 +17,9 @@ class GoalVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        navigationController?.navigationBar.isHidden = true
+        
         topView.delegate = self
         topView.btnLeft1.isHidden = true
         topView.btnRight2.isHidden = true
@@ -43,18 +45,13 @@ class GoalVC: UIViewController {
 
 extension GoalVC: TopViewDelegate {
     
-    func btnleft1Click() {
-        
-    }
+    func btnleft1Click() {}
     
     func btnRight1Click() {
         let storyboard = self.storyboard
         guard let settingVC = storyboard?.instantiateViewController(withIdentifier: "SettingVC") else { return }
-        self.navigationController?.pushViewController(settingVC, animated: true)
-        
+        self.navigationController?.pushViewController(settingVC, animated: true)        
     }
     
-    func btnRight2Click() {
-        
-    }
+    func btnRight2Click() {}
 }
