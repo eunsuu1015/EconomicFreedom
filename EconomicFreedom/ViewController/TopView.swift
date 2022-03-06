@@ -19,6 +19,8 @@ class TopView: UIView {
     @IBOutlet weak var btnRight1: UIButton!
     @IBOutlet weak var btnRight2: UIButton!
     @IBOutlet weak var labelSubTitle: UILabel!
+    @IBOutlet weak var viewRound: UIImageView!
+    @IBOutlet weak var viewSqure: UIImageView!
     
     let nibName = "TopView"
     var delegate: TopViewDelegate?

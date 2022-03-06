@@ -7,6 +7,18 @@
 
 import UIKit
 
+
+//static VIEW_TOP_RADIUS = 40;
+//static VIEW_RADIUS = 14;
+//static BTN_TAX_RADIUS = 11;
+//static VIEW_RESULT_RADIUS = 25;
+
+let TOP_VIEW_RADIUS: CGFloat = 40.0
+let VIEW_RADIUS: CGFloat = 14.0
+let BTN_TAX_RADIUS: CGFloat = 11.0
+let VIEW_RESULT_RADIUS: CGFloat = 25.0
+
+
 enum Tax {
     case general
     case free
@@ -21,23 +33,3 @@ enum HistoryDialog {
     case delete
 }
 
-enum ColorThemeNormal: Int {
-    case nomal1 = 0xaccae4
-    case nomal2 = 0xFAD19E
-    case nomal3 = 0xFB9E9E
-    case nomal4 = 0xB3DF97
-}
-
-enum ColorThemeSoft: Int {
-    case soft1 = 0xBBD8F1
-    case soft2 = 0xE0C0AB
-    case soft3 = 0xF7BEE1
-    case soft4 = 0xB4F19A
-}
-
-enum ColorThemeDark: Int {
-    case dark1 = 0xACC5DA
-    case dark2 = 0xDDB88D
-    case dark3 = 0xF1999C
-    case dark4 = 0xA5CD8C
-}

@@ -15,6 +15,8 @@
                 <outlet property="btnRight1" destination="x7K-6Z-sHu" id="q0G-YA-6Ab"/>
                 <outlet property="btnRight2" destination="ZQF-gU-YOe" id="STV-Wu-CCD"/>
                 <outlet property="labelSubTitle" destination="qSN-8P-Nnk" id="6jP-pV-Flm"/>
+                <outlet property="viewRound" destination="KF0-tV-Guj" id="2yf-Dr-q2S"/>
+                <outlet property="viewSqure" destination="ech-BJ-B1f" id="oAD-xe-uHz"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>

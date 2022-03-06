@@ -70,6 +70,8 @@
 		2DC216D627C90C95003E2E91 /* GoalVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DC216D527C90C95003E2E91 /* GoalVC.swift */; };
 		FA55F8D827CA53D000A2A423 /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA55F8D727CA53D000A2A423 /* Data.swift */; };
 		FA55F8DA27CA5B5100A2A423 /* UserDefaultsMgr.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA55F8D927CA5B5100A2A423 /* UserDefaultsMgr.swift */; };
+		FA68039927D3C73800F12D3B /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA68039827D3C73800F12D3B /* Extension.swift */; };
+		FA68039D27D3C9CD00F12D3B /* ColorTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA68039C27D3C9CD00F12D3B /* ColorTheme.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -150,6 +152,8 @@
 		2DC216D527C90C95003E2E91 /* GoalVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalVC.swift; sourceTree = "<group>"; };
 		FA55F8D727CA53D000A2A423 /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
 		FA55F8D927CA5B5100A2A423 /* UserDefaultsMgr.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsMgr.swift; sourceTree = "<group>"; };
+		FA68039827D3C73800F12D3B /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
+		FA68039C27D3C9CD00F12D3B /* ColorTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorTheme.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -197,7 +201,6 @@
 				2DC2164A27C88869003E2E91 /* ViewController */,
 				2DC2163627C88693003E2E91 /* AppDelegate.swift */,
 				2DC2163827C88693003E2E91 /* SceneDelegate.swift */,
-				2DC2166227C8F666003E2E91 /* Log.swift */,
 				2DC2163C27C88693003E2E91 /* Main.storyboard */,
 				2DC2163F27C88695003E2E91 /* Assets.xcassets */,
 				2DC2164127C88695003E2E91 /* LaunchScreen.storyboard */,
@@ -303,6 +306,9 @@
 				2DC216C427C8F88C003E2E91 /* EconomicFreedom-Bridging-Header.h */,
 				2DC2166027C8F4FC003E2E91 /* Constants.swift */,
 				FA55F8D927CA5B5100A2A423 /* UserDefaultsMgr.swift */,
+				FA68039827D3C73800F12D3B /* Extension.swift */,
+				2DC2166227C8F666003E2E91 /* Log.swift */,
+				FA68039C27D3C9CD00F12D3B /* ColorTheme.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -481,6 +487,8 @@
 				2DC2165227C888BE003E2E91 /* SettingVC.swift in Sources */,
 				2DC2163727C88693003E2E91 /* AppDelegate.swift in Sources */,
 				2DC2165027C888AC003E2E91 /* MemoVC.swift in Sources */,
+				FA68039D27D3C9CD00F12D3B /* ColorTheme.swift in Sources */,
+				FA68039927D3C73800F12D3B /* Extension.swift in Sources */,
 				2DC2165D27C8D79A003E2E91 /* TopView.swift in Sources */,
 				2DC2163927C88693003E2E91 /* SceneDelegate.swift in Sources */,
 				2DC2166127C8F4FD003E2E91 /* Constants.swift in Sources */,
