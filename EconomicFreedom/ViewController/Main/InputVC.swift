@@ -23,14 +23,14 @@ class InputVC: UIViewController {
     @IBOutlet weak var tfAge: UITextField!          // 현재 나이
     @IBOutlet weak var tfRetreatAge: UITextField!   // 퇴사 나이
     
-    // X 버튼
+    // X 버튼 - textfield 텍스트 지우기
     @IBOutlet weak var btnCapitalClear: UIButton!
     @IBOutlet weak var btnSavingClear: UIButton!
     @IBOutlet weak var btnMonthClear: UIButton!
     
     @IBOutlet weak var btnOk: UIButton!
     
-    // ? 버튼
+    // ? 버튼 - 도움말
     @IBOutlet weak var btnCapitalQuestion: UIButton!
     @IBOutlet weak var btnSavingQuestion: UIButton!
     @IBOutlet weak var btnInvestQuestion: UIButton!
@@ -54,9 +54,12 @@ class InputVC: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+
     }
     
     override func viewDidAppear(_ animated: Bool) {
+        // underline 길이 때문에 didAppear에서 진행해야 함
+        initTextField()
         
     }
     
@@ -107,9 +110,18 @@ class InputVC: UIViewController {
         tfCapital.delegate = self
         tfSaving.delegate = self
         tfInvest.delegate = self
+        tfMonth.delegate = self
         tfAge.delegate = self
         tfRetreatAge.delegate = self
-        tfMonth.delegate = self
+        
+        
+        tfCapital.addUnderline(color: UIColor.systemGray5)
+        tfSaving.addUnderline(color: UIColor.systemGray5)
+        tfInvest.addUnderline(color: UIColor.systemGray5)
+        tfMonth.addUnderline(color: UIColor.systemGray5)
+        tfAge.addUnderline(color: UIColor.systemGray5)
+        tfRetreatAge.addUnderline(color: UIColor.systemGray5)
+        
         
         tfCapital.addTarget(self, action: #selector(tfDidChanged(textField:)), for: .editingChanged)
         tfSaving.addTarget(self, action: #selector(tfDidChanged(textField:)), for: .editingChanged)
@@ -117,17 +129,37 @@ class InputVC: UIViewController {
         tfMonth.addTarget(self, action: #selector(tfDidChanged(textField:)), for: .editingChanged)
     }
     
+    /// textField 값 변경될 때 - 2차
     @objc func tfDidChanged(textField: UITextField) {
+        if textField != tfInvest {
+            if (textField.text?.count != 0) {
+                // TODO: decimal style 적용
+//                textField.text =
+            }
+        }
+        
+        let value = Int(textField.text!) ?? 0
         if textField == tfCapital {
+            btnCapitalClear.isHidden = false
             
         } else if textField == tfSaving {
+            btnSavingClear.isHidden = false
             
         } else if textField == tfInvest {
-            if textField.text?.count != 0 {
-//                textField.text
+            if value > 100 {
+                tfInvest.text = "100"
+                // TODO: toast 안내
             }
-        } else if textField == tfMonth {
             
+        } else if textField == tfAge {
+            if value < 10 {
+                tfAge.text = "10"
+            }
+            
+        } else if textField == tfRetreatAge {
+            if value > 80 {
+                tfRetreatAge.text = "80"
+            }
         }
     }
     
@@ -217,6 +249,9 @@ class InputVC: UIViewController {
     @IBAction func btnOkClick(_ sender: Any) {
     }
     
+    // MARK: - Etc
+    
+    
 }
 
 // MARK: - UITextFieldDelegate
@@ -238,14 +273,45 @@ extension InputVC: UITextFieldDelegate {
         btnMonthClear.isHidden = true
     }
     
-    /// textField 값 변경될 때 (최대 길이 설정)
+    /// textField 값 변경될 때 (최대 길이 설정) - 1차
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         if range.length + range.location > textField.text?.count ?? 0 {
             return false
         }
         
-        // TODO:
+        let newLen = textField.text!.count + string.count - range.length
         
+        if textField == tfCapital {
+            return newLen <= 19
+        } else if textField == tfSaving {
+            return newLen <= 10
+        } else if textField == tfMonth {
+            return newLen <= 11
+        } else if textField == tfInvest {
+            let input = textField.text!
+            if input.contains(".") {
+                // 소수점 있음
+                if string == "." {
+                    // TODO: false 정상 작동하는지 확인
+                    return false
+                }
+                
+                // TODO: 상세 자릿수 계산
+                return newLen <= 6
+                
+            } else {
+                // 소수점 없음
+                if input.contains(".") {
+                    return true
+                } else {
+                    return newLen <= 3
+                }
+            }
+            
+        } else if textField == tfAge || textField == tfRetreatAge {
+            print("newlen ? \(newLen)")
+            return newLen <= 2
+        }
         return true
     }
 }
@@ -253,9 +319,7 @@ extension InputVC: UITextFieldDelegate {
 // MARK: - TopViewDelegate
 
 extension InputVC: TopViewDelegate {
-    func btnleft1Click() {
-        
-    }
+    func btnleft1Click() { }
     
     func btnRight1Click() {
         let storyboard = self.storyboard
@@ -264,7 +328,5 @@ extension InputVC: TopViewDelegate {
         
     }
     
-    func btnRight2Click() {
-        
-    }
+    func btnRight2Click() { }
 }

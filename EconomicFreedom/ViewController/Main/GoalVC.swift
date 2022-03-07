@@ -23,6 +23,7 @@ class GoalVC: UIViewController {
         topView.delegate = self
         topView.btnLeft1.isHidden = true
         topView.btnRight2.isHidden = true
+        tfAge.delegate = self
         
         let goal: String
         goal = UserDefaultsMgr.get(key: goalAge)
@@ -39,6 +40,17 @@ class GoalVC: UIViewController {
         }
     }
     
+}
+
+// MARK: - UITextFieldDelegate
+
+extension GoalVC: UITextFieldDelegate {
+    
+    /// textField 값 변경될 때 (최대 길이 설정)
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        let newLen = textField.text!.count + string.count - range.length
+        return newLen <= 2
+    }
 }
 
 // MARK: - TopViewDelegate

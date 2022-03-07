@@ -69,3 +69,14 @@ extension String {
         
     }
 }
+
+extension UITextField {
+    // underline 추가
+    func addUnderline(color: UIColor) {
+        let underline = CALayer()
+        underline.frame = CGRect(x: 0, y: self.frame.size.height - 1, width: self.frame.size.width, height: 1)
+        underline.backgroundColor = color.cgColor
+        self.borderStyle = .none
+        self.layer.addSublayer(underline)
+    }
+}
