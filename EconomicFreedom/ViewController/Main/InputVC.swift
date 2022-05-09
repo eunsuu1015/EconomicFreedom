@@ -205,15 +205,19 @@ class InputVC: UIViewController {
     // MARK: Question
     
     @IBAction func btnCapitalQuestionClick(_ sender: Any) {
+        Dialog.showDialogNonEvent(title: "지금까지 모아둔 돈", content: "투자를 위해 저축할 수 있는 여유자금을 의미합니다.", vc: self)
     }
     
     @IBAction func btnSavingQuestionClick(_ sender: Any) {
+        Dialog.showDialogNonEvent(title: "저축액/월", content: "매월 투자할 수 있는 저축액을 의미합니다.", vc: self)
     }
     
     @IBAction func btnInvestQuestionClick(_ sender: Any) {
+        Dialog.showDialogNonEvent(title: "연 평균 기대 수익률", content: "투자를 했을 때 기대되는 수익률의 평균을 의미합니다.\n\n단기 채권(미국)\n기대수익률(1977~2021) : 5.69%\n\n영구 포트폴리오\n기대 수익률(1972~2021) : 8.44%\n\n주식(미국) 채권 6/4 포트폴리오\n기대 수익률(1972~2021) : 9.82%\n\n주식(미국) 포트폴리오\n기대 수익률(1972~2021) : 10.92%", vc: self)
     }
     
     @IBAction func btnMonthQuestionClick(_ sender: Any) {
+        Dialog.showDialogNonEvent(title: "목표 현금흐름/월", content: "퇴사 후 이자로 받을 목표 현금흐름을 의미합니다.", vc: self)
     }
     
     // MARK: Clear

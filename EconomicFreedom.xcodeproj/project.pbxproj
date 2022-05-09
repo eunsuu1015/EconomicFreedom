@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2D6C7AE22829478A00D752D0 /* DialogVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2D6C7ADF2829478A00D752D0 /* DialogVC.xib */; };
+		2D6C7AE32829478A00D752D0 /* CommDialogVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D6C7AE02829478A00D752D0 /* CommDialogVC.swift */; };
+		2D6C7AE42829478A00D752D0 /* DialogVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D6C7AE12829478A00D752D0 /* DialogVC.swift */; };
+		2D6C7AE6282947A200D752D0 /* Dialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D6C7AE5282947A200D752D0 /* Dialog.swift */; };
 		2DC2163727C88693003E2E91 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DC2163627C88693003E2E91 /* AppDelegate.swift */; };
 		2DC2163927C88693003E2E91 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DC2163827C88693003E2E91 /* SceneDelegate.swift */; };
 		2DC2163E27C88693003E2E91 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2DC2163C27C88693003E2E91 /* Main.storyboard */; };
@@ -85,6 +89,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2D6C7ADF2829478A00D752D0 /* DialogVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DialogVC.xib; sourceTree = "<group>"; };
+		2D6C7AE02829478A00D752D0 /* CommDialogVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommDialogVC.swift; sourceTree = "<group>"; };
+		2D6C7AE12829478A00D752D0 /* DialogVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DialogVC.swift; sourceTree = "<group>"; };
+		2D6C7AE5282947A200D752D0 /* Dialog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dialog.swift; sourceTree = "<group>"; };
 		2DC2163327C88693003E2E91 /* EconomicFreedom.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EconomicFreedom.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2DC2163627C88693003E2E91 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2DC2163827C88693003E2E91 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -174,6 +182,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2D6C7ADE2829478A00D752D0 /* Dialog */ = {
+			isa = PBXGroup;
+			children = (
+				2D6C7ADF2829478A00D752D0 /* DialogVC.xib */,
+				2D6C7AE02829478A00D752D0 /* CommDialogVC.swift */,
+				2D6C7AE12829478A00D752D0 /* DialogVC.swift */,
+			);
+			path = Dialog;
+			sourceTree = "<group>";
+		};
 		2DC2162A27C88693003E2E91 = {
 			isa = PBXGroup;
 			children = (
@@ -212,6 +230,7 @@
 		2DC2164A27C88869003E2E91 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				2D6C7ADE2829478A00D752D0 /* Dialog */,
 				2DC2165527C888DA003E2E91 /* Main */,
 				2DC2165127C888BE003E2E91 /* SettingVC.swift */,
 				2DC2165327C888D5003E2E91 /* ExplainVC.swift */,
@@ -309,6 +328,7 @@
 				FA68039827D3C73800F12D3B /* Extension.swift */,
 				2DC2166227C8F666003E2E91 /* Log.swift */,
 				FA68039C27D3C9CD00F12D3B /* ColorTheme.swift */,
+				2D6C7AE5282947A200D752D0 /* Dialog.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -449,6 +469,7 @@
 				2DC216B127C8F7A7003E2E91 /* icon_result_50.png in Resources */,
 				2DC216A727C8F7A7003E2E91 /* history3.png in Resources */,
 				2DC2169D27C8F7A7003E2E91 /* dot.png in Resources */,
+				2D6C7AE22829478A00D752D0 /* DialogVC.xib in Resources */,
 				2DC216C227C8F7A7003E2E91 /* close.png in Resources */,
 				2DC216C127C8F7A7003E2E91 /* close_min.png in Resources */,
 				2DC2169A27C8F7A7003E2E91 /* icon_bad.png in Resources */,
@@ -478,8 +499,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2D6C7AE32829478A00D752D0 /* CommDialogVC.swift in Sources */,
 				2DC2164E27C888A4003E2E91 /* InputVC.swift in Sources */,
+				2D6C7AE42829478A00D752D0 /* DialogVC.swift in Sources */,
 				FA55F8DA27CA5B5100A2A423 /* UserDefaultsMgr.swift in Sources */,
+				2D6C7AE6282947A200D752D0 /* Dialog.swift in Sources */,
 				2DC216D627C90C95003E2E91 /* GoalVC.swift in Sources */,
 				2DC2165427C888D5003E2E91 /* ExplainVC.swift in Sources */,
 				2DC2166327C8F666003E2E91 /* Log.swift in Sources */,
