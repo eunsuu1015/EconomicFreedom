@@ -2,7 +2,7 @@
 //  CommDialogVC.swift
 //  EconomicFreedom
 //
-//  Created by EunSu on 2022/06/03.
+//  Created by Authlabs on 2022/05/09.
 //
 
 import UIKit
