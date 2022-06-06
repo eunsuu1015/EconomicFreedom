@@ -15,6 +15,10 @@ extension UIView {
         self.layer.cornerRadius = self.frame.size.width/2
     }
     
+    func makeCircles() {
+        
+    }
+    
     /// 라운드 처리
     /// - Parameter radius: 라운드 정도
     func cornerRadius(_ radius: CGFloat) {
@@ -22,6 +26,43 @@ extension UIView {
         self.layer.cornerRadius = radius
     }
     
+}
+
+extension UIViewController {
+    
+    /// DialogVC 출력
+    /// - Parameters:
+    ///   - title: 타이틀
+    ///   - content: 컨텐츠
+    func showDialog(title: String = "알림", content: String) {
+        let dialog = DialogVC(content: content)
+        present(dialog, animated: false, completion: nil)
+    }
+    
+    /// 토스트 메시지 출력
+    /// - Parameter message: 출력할 메시지
+    func showToast(_ message : String, duration: Double = 1.5) {
+        let toastLabel = UILabel(frame: CGRect(
+            x: self.view.frame.size.width/2 - 125,
+            y: self.view.frame.size.height/2 - 100,
+            width: 250,
+            height: 35))
+        toastLabel.backgroundColor = UIColor.black.withAlphaComponent(0.6)
+        toastLabel.textColor = UIColor.white
+        toastLabel.font = UIFont.systemFont(ofSize: 14.0)
+        toastLabel.textAlignment = .center;
+        toastLabel.text = message
+        toastLabel.alpha = 1.0
+        toastLabel.layer.cornerRadius = 10;
+        toastLabel.clipsToBounds  =  true
+        self.view.addSubview(toastLabel)
+        UIView.animate(withDuration: duration, delay: 0.1, options: .curveEaseOut, animations: {
+            toastLabel.alpha = 0.9
+        }, completion: {(isCompleted) in
+            toastLabel.removeFromSuperview()
+        })
+    }
+        
 }
 
 extension UIColor {
@@ -65,8 +106,13 @@ extension UIColor {
 }
 
 extension String {
-    func setDecimalStyle(st: String) {
-        
+    
+    /// String을 decimal Style로 변경
+    /// - Parameter st: String
+    func setDecimalStyle(st: String) -> String {
+        let text = st.replacingOccurrences(of: ",", with: "")
+        let num: NSNumber = NSNumber(value: Double(text)!)
+        return NumberFormatter.localizedString(from: num, number: .decimal)
     }
 }
 

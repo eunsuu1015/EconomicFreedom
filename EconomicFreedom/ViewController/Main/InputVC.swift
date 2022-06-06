@@ -42,6 +42,7 @@ class InputVC: UIViewController {
     var isFirst = true
     var tax: Tax = .general
     var btn = 0
+    var inputViewModel = InputViewModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -60,23 +61,17 @@ class InputVC: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         // underline 길이 때문에 didAppear에서 진행해야 함
         initTextField()
-        
     }
     
     
     // MARK: - Init
     
     func initLayout() {
-        btnCapitalQuestion.makeCircle()
-        btnSavingQuestion.makeCircle()
-        btnInvestQuestion.makeCircle()
-        btnMonthQuestion.makeCircle()
+        makeCircles(views: btnCapitalQuestion, btnSavingQuestion, btnInvestQuestion, btnMonthQuestion)
         
         topView.viewRound.cornerRadius(TOP_VIEW_RADIUS)
         btnOk.cornerRadius(VIEW_RADIUS)
-        btnTaxGeneral.cornerRadius(BTN_TAX_RADIUS)
-        btnTaxFree.cornerRadius(BTN_TAX_RADIUS)
-        btnTaxPreferential.cornerRadius(BTN_TAX_RADIUS)
+        makeCornerRadius(radius: BTN_TAX_RADIUS, views: btnTaxGeneral, btnTaxFree, btnTaxPreferential)
     }
     
     func initColorTheme() {
@@ -92,17 +87,25 @@ class InputVC: UIViewController {
     func initTopView() {
         topView.btnLeft1.isHidden = true
     }
-    
-    
-    func isEmptyInputValue() {
         
-    }
-    
     func changeTabbar() {
         UITabBar.appearance().barTintColor = UIColor.white
         UITabBar.appearance().tintColor = ColorTheme.shared.darkColor
     }
     
+    // MARK: - UI
+    
+    func changeNormalTax(btn: UIButton, color: Int) {
+        btn.layer.borderWidth = 1
+        view.layer.backgroundColor = UIColor.white.cgColor
+        view.layer.borderColor = UIColor.init(rgb: color, alpha: 0.3).cgColor
+    }
+    
+    func changePressTax(btn: UIButton, color: Int) {
+        btn.layer.borderWidth = 1
+        view.layer.backgroundColor = UIColor.init(rgb: color, alpha: 0.3).cgColor
+        view.layer.borderColor = UIColor.init(rgb: color, alpha: 0.3).cgColor
+    }
     
     // MARK: - TextField
     
@@ -113,16 +116,14 @@ class InputVC: UIViewController {
         tfMonth.delegate = self
         tfAge.delegate = self
         tfRetreatAge.delegate = self
-        
-        
+                
         tfCapital.addUnderline(color: UIColor.systemGray5)
         tfSaving.addUnderline(color: UIColor.systemGray5)
         tfInvest.addUnderline(color: UIColor.systemGray5)
         tfMonth.addUnderline(color: UIColor.systemGray5)
         tfAge.addUnderline(color: UIColor.systemGray5)
         tfRetreatAge.addUnderline(color: UIColor.systemGray5)
-        
-        
+                
         tfCapital.addTarget(self, action: #selector(tfDidChanged(textField:)), for: .editingChanged)
         tfSaving.addTarget(self, action: #selector(tfDidChanged(textField:)), for: .editingChanged)
         tfInvest.addTarget(self, action: #selector(tfDidChanged(textField:)), for: .editingChanged)
@@ -133,8 +134,7 @@ class InputVC: UIViewController {
     @objc func tfDidChanged(textField: UITextField) {
         if textField != tfInvest {
             if (textField.text?.count != 0) {
-                // TODO: decimal style 적용
-//                textField.text =
+                textField.text = stringToDecimalString(textField.text!)
             }
         }
         
@@ -148,7 +148,7 @@ class InputVC: UIViewController {
         } else if textField == tfInvest {
             if value > 100 {
                 tfInvest.text = "100"
-                // TODO: toast 안내
+                showToast("100이하의 숫자만 입력할 수 있습니다.")
             }
             
         } else if textField == tfAge {
@@ -163,7 +163,7 @@ class InputVC: UIViewController {
         }
     }
     
-    // MARK: Tax Event
+    // MARK: - Tax Event
     
     func setTaxBtn(select: Tax) {
         tax = select
@@ -205,15 +205,23 @@ class InputVC: UIViewController {
     // MARK: Question
     
     @IBAction func btnCapitalQuestionClick(_ sender: Any) {
+        let vc = DialogVC(title: "지금까지 모아둔 돈", content: "투자를 위해 저축할 수 있는 여유자금을 의미합니다.")
+        present(vc, animated: false, completion: nil)
     }
     
     @IBAction func btnSavingQuestionClick(_ sender: Any) {
+        let vc = DialogVC(title: "저축액/월", content: "매월 투자할 수 있는 저축액을 의미합니다.")
+        present(vc, animated: false, completion: nil)
     }
     
     @IBAction func btnInvestQuestionClick(_ sender: Any) {
+        let vc = DialogVC(title: "연 평균 기대 수익률", content: "투자를 했을 때 기대되는 수익률의 평균을 의미합니다.\n\n단기 채권(미국)\n기대수익률(1977~2021) : 5.69%\n\n영구 포트폴리오\n기대 수익률(1972~2021) : 8.44%\n\n주식(미국) 채권 6/4 포트폴리오\n기대 수익률(1972~2021) : 9.82%\n\n주식(미국) 포트폴리오\n기대 수익률(1972~2021) : 10.92%")
+        present(vc, animated: false, completion: nil)
     }
     
     @IBAction func btnMonthQuestionClick(_ sender: Any) {
+        let vc = DialogVC(title: "목표 현금흐름/월", content: "퇴사 후 이자로 받을 목표 현금흐름을 의미합니다.")
+        present(vc, animated: false, completion: nil)
     }
     
     // MARK: Clear
@@ -247,16 +255,92 @@ class InputVC: UIViewController {
     // MARK: Etc
     
     @IBAction func btnOkClick(_ sender: Any) {
+        print("확인 버튼 클릭")
+        
+        if isEmptyInputValue() {
+            print("빈 값 있음")
+            return
+        }
+        
+        if isWrongInputValue() {
+            print("잘못된 값 있음")
+            return
+        }
+        
+        // 결과 화면으로 이동
+        
     }
     
     // MARK: - Etc
     
+    /// TextField 입력값 중 빈 값 있는지 확인
+    /// - Returns: 빈 값 유무
+    func isEmptyInputValue() -> Bool {
+        guard tfCapital.text?.count != 0 else {
+            showDialog(content: "지금까지 모아둔 돈을 입력해주세요.")
+            return true
+        }
+        guard tfSaving.text?.count != 0 else {
+            showDialog(content: "저축액/월을 입력해주세요.")
+            return true
+        }
+        guard tfInvest.text?.count != 0 else {
+            showDialog(content: "연 평균 기대수익률을 입력해주세요.")
+            return true
+        }
+        guard tfAge.text?.count != 0 else {
+            showDialog(content: "현재 나이를 입력해주세요.")
+            return true
+        }
+        guard tfRetreatAge.text?.count != 0 else {
+            showDialog(content: "퇴사 나이를 입력해주세요.")
+            return true
+        }
+        guard tfMonth.text?.count != 0 else {
+            showDialog(content: "목표 현금흐름/월을 입력해주세요.")
+            return true
+        }
+        return false
+    }
+    
+    /// 잘못 입력된 값 있는지 확인
+    /// - Returns: 잘못 입력된 값 유무
+    func isWrongInputValue() -> Bool {
+        if let inputAge = tfAge.text, let inputRetreatAge = tfRetreatAge.text {
+            let age = Int(inputAge)!
+            let retreatAge = Int(inputRetreatAge)!
+            
+            guard age >= 10 else {
+                tfAge.text = "10"
+                showDialog(content: "현재 나이는 10 이상의 숫자만 입력할 수 있습니다.")
+                return true
+            }
+            
+            guard retreatAge <= 80 else {
+                tfRetreatAge.text = "80"
+                showDialog(content: "퇴사 나이는 80 이하의 숫자만 입력할 수 있습니다.")
+                return true
+            }
+            
+            guard age != retreatAge else {
+                showDialog(content: "퇴사 나이가 현재 나이와 같습니다.")
+                return true
+            }
+            
+            guard age < retreatAge else {
+                showDialog(content: "퇴사 나이는 현재 나이보다 적을 수 없습니다.")
+                return true
+            }
+        }
+        return false
+    }
     
 }
 
 // MARK: - UITextFieldDelegate
 
 extension InputVC: UITextFieldDelegate {
+    /// 입력 시작되면 x 버튼 보임
     func textFieldDidBeginEditing(_ textField: UITextField) {
         if textField == tfCapital {
             btnCapitalClear.isHidden = false
@@ -267,6 +351,7 @@ extension InputVC: UITextFieldDelegate {
         }
     }
     
+    // 입력 종료되면 x 버튼 숨김
     func textFieldDidEndEditing(_ textField: UITextField) {
         btnCapitalClear.isHidden = true
         btnSavingClear.isHidden = true

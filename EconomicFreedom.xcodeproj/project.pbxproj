@@ -68,10 +68,19 @@
 		2DC216C227C8F7A7003E2E91 /* close.png in Resources */ = {isa = PBXBuildFile; fileRef = 2DC2169427C8F7A7003E2E91 /* close.png */; };
 		2DC216CF27C90337003E2E91 /* EconomicFreedomTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DC216CE27C90337003E2E91 /* EconomicFreedomTests.swift */; };
 		2DC216D627C90C95003E2E91 /* GoalVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DC216D527C90C95003E2E91 /* GoalVC.swift */; };
+		FA548176283FE0D2003C4906 /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = FA548175283FE0D2003C4906 /* RxSwift */; };
+		FA54818428423114003C4906 /* Input.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA54818328423114003C4906 /* Input.swift */; };
+		FA5481882842317C003C4906 /* InputViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5481872842317C003C4906 /* InputViewModel.swift */; };
+		FA54818D2842509F003C4906 /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = FA54818C2842509F003C4906 /* RxCocoa */; };
 		FA55F8D827CA53D000A2A423 /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA55F8D727CA53D000A2A423 /* Data.swift */; };
 		FA55F8DA27CA5B5100A2A423 /* UserDefaultsMgr.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA55F8D927CA5B5100A2A423 /* UserDefaultsMgr.swift */; };
 		FA68039927D3C73800F12D3B /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA68039827D3C73800F12D3B /* Extension.swift */; };
 		FA68039D27D3C9CD00F12D3B /* ColorTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA68039C27D3C9CD00F12D3B /* ColorTheme.swift */; };
+		FAA8AE5B27DE08AD000A3EEF /* DialogVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA8AE5927DE08AD000A3EEF /* DialogVC.swift */; };
+		FAA8AE5C27DE08AD000A3EEF /* DialogVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = FAA8AE5A27DE08AD000A3EEF /* DialogVC.xib */; };
+		FAD12BB5284A18C8008FD781 /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD12BB4284A18C8008FD781 /* Util.swift */; };
+		FAD12BB8284A2DC1008FD781 /* CommDialogVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD12BB7284A2DC1008FD781 /* CommDialogVC.swift */; };
+		FAD12BBA284E7593008FD781 /* ResultVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD12BB9284E7593008FD781 /* ResultVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -83,6 +92,19 @@
 			remoteInfo = EconomicFreedom;
 		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		FA54817E28422E7E003C4906 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		2DC2163327C88693003E2E91 /* EconomicFreedom.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EconomicFreedom.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -150,10 +172,17 @@
 		2DC216CC27C90337003E2E91 /* EconomicFreedomTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EconomicFreedomTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2DC216CE27C90337003E2E91 /* EconomicFreedomTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EconomicFreedomTests.swift; sourceTree = "<group>"; };
 		2DC216D527C90C95003E2E91 /* GoalVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalVC.swift; sourceTree = "<group>"; };
+		FA54818328423114003C4906 /* Input.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Input.swift; sourceTree = "<group>"; };
+		FA5481872842317C003C4906 /* InputViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputViewModel.swift; sourceTree = "<group>"; };
 		FA55F8D727CA53D000A2A423 /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
 		FA55F8D927CA5B5100A2A423 /* UserDefaultsMgr.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsMgr.swift; sourceTree = "<group>"; };
 		FA68039827D3C73800F12D3B /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
 		FA68039C27D3C9CD00F12D3B /* ColorTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorTheme.swift; sourceTree = "<group>"; };
+		FAA8AE5927DE08AD000A3EEF /* DialogVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DialogVC.swift; sourceTree = "<group>"; };
+		FAA8AE5A27DE08AD000A3EEF /* DialogVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DialogVC.xib; sourceTree = "<group>"; };
+		FAD12BB4284A18C8008FD781 /* Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
+		FAD12BB7284A2DC1008FD781 /* CommDialogVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommDialogVC.swift; sourceTree = "<group>"; };
+		FAD12BB9284E7593008FD781 /* ResultVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -161,6 +190,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FA54818D2842509F003C4906 /* RxCocoa in Frameworks */,
+				FA548176283FE0D2003C4906 /* RxSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -180,6 +211,7 @@
 				2DC2163527C88693003E2E91 /* EconomicFreedom */,
 				2DC216CD27C90337003E2E91 /* EconomicFreedomTests */,
 				2DC2163427C88693003E2E91 /* Products */,
+				FA5481892842349E003C4906 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -195,6 +227,8 @@
 		2DC2163527C88693003E2E91 /* EconomicFreedom */ = {
 			isa = PBXGroup;
 			children = (
+				FA54818628423156003C4906 /* Model */,
+				FA5481852842314E003C4906 /* ViewModel */,
 				FA55F8D627CA53C400A2A423 /* Data */,
 				2DC216C327C8F850003E2E91 /* Common */,
 				2DC2166427C8F7A6003E2E91 /* Res */,
@@ -212,7 +246,9 @@
 		2DC2164A27C88869003E2E91 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				FAD12BB6284A2D9D008FD781 /* Dialog */,
 				2DC2165527C888DA003E2E91 /* Main */,
+				FAD12BB9284E7593008FD781 /* ResultVC.swift */,
 				2DC2165127C888BE003E2E91 /* SettingVC.swift */,
 				2DC2165327C888D5003E2E91 /* ExplainVC.swift */,
 				2DC2165C27C8D79A003E2E91 /* TopView.swift */,
@@ -309,6 +345,7 @@
 				FA68039827D3C73800F12D3B /* Extension.swift */,
 				2DC2166227C8F666003E2E91 /* Log.swift */,
 				FA68039C27D3C9CD00F12D3B /* ColorTheme.swift */,
+				FAD12BB4284A18C8008FD781 /* Util.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -321,12 +358,45 @@
 			path = EconomicFreedomTests;
 			sourceTree = "<group>";
 		};
+		FA5481852842314E003C4906 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				FA5481872842317C003C4906 /* InputViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		FA54818628423156003C4906 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				FA54818328423114003C4906 /* Input.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		FA5481892842349E003C4906 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		FA55F8D627CA53C400A2A423 /* Data */ = {
 			isa = PBXGroup;
 			children = (
 				FA55F8D727CA53D000A2A423 /* Data.swift */,
 			);
 			path = Data;
+			sourceTree = "<group>";
+		};
+		FAD12BB6284A2D9D008FD781 /* Dialog */ = {
+			isa = PBXGroup;
+			children = (
+				FAA8AE5927DE08AD000A3EEF /* DialogVC.swift */,
+				FAA8AE5A27DE08AD000A3EEF /* DialogVC.xib */,
+				FAD12BB7284A2DC1008FD781 /* CommDialogVC.swift */,
+			);
+			path = Dialog;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -339,12 +409,17 @@
 				2DC2162F27C88693003E2E91 /* Sources */,
 				2DC2163027C88693003E2E91 /* Frameworks */,
 				2DC2163127C88693003E2E91 /* Resources */,
+				FA54817E28422E7E003C4906 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			name = EconomicFreedom;
+			packageProductDependencies = (
+				FA548175283FE0D2003C4906 /* RxSwift */,
+				FA54818C2842509F003C4906 /* RxCocoa */,
+			);
 			productName = EconomicFreedom;
 			productReference = 2DC2163327C88693003E2E91 /* EconomicFreedom.app */;
 			productType = "com.apple.product-type.application";
@@ -396,6 +471,9 @@
 				Base,
 			);
 			mainGroup = 2DC2162A27C88693003E2E91;
+			packageReferences = (
+				FA548168283FE0D2003C4906 /* XCRemoteSwiftPackageReference "RxSwift" */,
+			);
 			productRefGroup = 2DC2163427C88693003E2E91 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -449,6 +527,7 @@
 				2DC216B127C8F7A7003E2E91 /* icon_result_50.png in Resources */,
 				2DC216A727C8F7A7003E2E91 /* history3.png in Resources */,
 				2DC2169D27C8F7A7003E2E91 /* dot.png in Resources */,
+				FAA8AE5C27DE08AD000A3EEF /* DialogVC.xib in Resources */,
 				2DC216C227C8F7A7003E2E91 /* close.png in Resources */,
 				2DC216C127C8F7A7003E2E91 /* close_min.png in Resources */,
 				2DC2169A27C8F7A7003E2E91 /* icon_bad.png in Resources */,
@@ -479,19 +558,25 @@
 			buildActionMask = 2147483647;
 			files = (
 				2DC2164E27C888A4003E2E91 /* InputVC.swift in Sources */,
+				FAD12BB5284A18C8008FD781 /* Util.swift in Sources */,
 				FA55F8DA27CA5B5100A2A423 /* UserDefaultsMgr.swift in Sources */,
 				2DC216D627C90C95003E2E91 /* GoalVC.swift in Sources */,
 				2DC2165427C888D5003E2E91 /* ExplainVC.swift in Sources */,
+				FAD12BBA284E7593008FD781 /* ResultVC.swift in Sources */,
 				2DC2166327C8F666003E2E91 /* Log.swift in Sources */,
 				FA55F8D827CA53D000A2A423 /* Data.swift in Sources */,
+				FA54818428423114003C4906 /* Input.swift in Sources */,
 				2DC2165227C888BE003E2E91 /* SettingVC.swift in Sources */,
 				2DC2163727C88693003E2E91 /* AppDelegate.swift in Sources */,
 				2DC2165027C888AC003E2E91 /* MemoVC.swift in Sources */,
 				FA68039D27D3C9CD00F12D3B /* ColorTheme.swift in Sources */,
 				FA68039927D3C73800F12D3B /* Extension.swift in Sources */,
+				FA5481882842317C003C4906 /* InputViewModel.swift in Sources */,
+				FAA8AE5B27DE08AD000A3EEF /* DialogVC.swift in Sources */,
 				2DC2165D27C8D79A003E2E91 /* TopView.swift in Sources */,
 				2DC2163927C88693003E2E91 /* SceneDelegate.swift in Sources */,
 				2DC2166127C8F4FD003E2E91 /* Constants.swift in Sources */,
+				FAD12BB8284A2DC1008FD781 /* CommDialogVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -781,6 +866,30 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		FA548168283FE0D2003C4906 /* XCRemoteSwiftPackageReference "RxSwift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ReactiveX/RxSwift.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 6.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		FA548175283FE0D2003C4906 /* RxSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FA548168283FE0D2003C4906 /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxSwift;
+		};
+		FA54818C2842509F003C4906 /* RxCocoa */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FA548168283FE0D2003C4906 /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxCocoa;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 2DC2162B27C88693003E2E91 /* Project object */;
 }

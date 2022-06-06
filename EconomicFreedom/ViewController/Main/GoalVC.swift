@@ -25,19 +25,44 @@ class GoalVC: UIViewController {
         topView.btnRight2.isHidden = true
         tfAge.delegate = self
         
-        let goal: String
-        goal = UserDefaultsMgr.get(key: goalAge)
+        initLayout()
+        initColorTheme()
+        
+        let goal = loadGoal()
         if goal != "" {
             tfAge.text = goal
         }
         
     }
+    
+    // MARK: - Init
+    
+    func initLayout() {
+        topView.viewRound.cornerRadius(TOP_VIEW_RADIUS)
+    }
+    
+    func initColorTheme() {
+        let normalColor = ColorTheme.shared.normalColor
+        topView.viewRound.backgroundColor = normalColor
+        topView.viewSqure.backgroundColor = normalColor
+    }
+    
+    // MARK: - TextField
 
     @IBAction func tfDidChange(_ sender: Any) {
         Log.d("start")
         if tfAge.text?.count != 0 {
-            UserDefaultsMgr.set(key: goalAge, value: tfAge.text!)
+            Log.d("count != 0")
+            saveGoal(tfAge.text!)
         }
+    }
+    
+    func saveGoal(_ goal: String) {
+        UserDefaultsMgr.set(key: goalAge, value: goal)
+    }
+    
+    func loadGoal() -> String {
+        return UserDefaultsMgr.get(key: goalAge)
     }
     
 }

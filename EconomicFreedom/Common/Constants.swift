@@ -19,10 +19,21 @@ let BTN_TAX_RADIUS: CGFloat = 11.0
 let VIEW_RESULT_RADIUS: CGFloat = 25.0
 
 
-enum Tax {
+enum Tax: Int {
+    case free = 0
     case general
-    case free
     case preferential
+    
+    func getFloat() -> Float {
+        switch self {
+        case .free:
+            return 0.0
+        case .general:
+            return 15.4
+        case .preferential:
+            return 9.5
+        }
+    }
 }
 
 enum HistoryDialog {

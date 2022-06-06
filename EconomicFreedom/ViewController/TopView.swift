@@ -8,8 +8,11 @@
 import UIKit
 
 protocol TopViewDelegate {
+    /// 왼쪽 첫 번쨰 버튼 이벤트
     func btnleft1Click()
+    /// 오른쪽 첫 번째 버튼 이벤트
     func btnRight1Click()
+    /// 오른쪽 두 번째 버튼 이벤트
     func btnRight2Click()
 }
 

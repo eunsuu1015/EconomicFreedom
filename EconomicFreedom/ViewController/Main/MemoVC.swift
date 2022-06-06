@@ -32,6 +32,8 @@ class MemoVC: UIViewController {
         
     }
     
+    // MARK: - Init
+    
     func initLayout() {
         
     }
