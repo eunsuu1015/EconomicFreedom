@@ -31,11 +31,15 @@ class TopView: UIView {
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         commonInit()
+        initLayout()
+        initColorTheme()
     }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         commonInit()
+        initLayout()
+        initColorTheme()
     }
     
     func commonInit() {
@@ -47,6 +51,16 @@ class TopView: UIView {
     func loadViewFromNib() -> UIView? {
         let nib = UINib(nibName: nibName, bundle: nil)
         return nib.instantiate(withOwner: self, options: nil).first as? UIView
+    }
+    
+    func initLayout() {
+        viewRound.cornerRadius(TOP_VIEW_RADIUS)
+    }
+    
+    func initColorTheme() {
+        let normalColor = ColorTheme.shared.normalColor
+        viewRound.backgroundColor = normalColor
+        viewSqure.backgroundColor = normalColor
     }
     
     // MARK: - Button Event

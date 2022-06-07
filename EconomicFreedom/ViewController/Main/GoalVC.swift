@@ -24,10 +24,7 @@ class GoalVC: UIViewController {
         topView.btnLeft1.isHidden = true
         topView.btnRight2.isHidden = true
         tfAge.delegate = self
-        
-        initLayout()
-        initColorTheme()
-        
+                
         let goal = loadGoal()
         if goal != "" {
             tfAge.text = goal
@@ -37,14 +34,8 @@ class GoalVC: UIViewController {
     
     // MARK: - Init
     
-    func initLayout() {
-        topView.viewRound.cornerRadius(TOP_VIEW_RADIUS)
-    }
-    
-    func initColorTheme() {
-        let normalColor = ColorTheme.shared.normalColor
-        topView.viewRound.backgroundColor = normalColor
-        topView.viewSqure.backgroundColor = normalColor
+    override func viewWillAppear(_ animated: Bool) {
+        // initColorTheme()
     }
     
     // MARK: - TextField

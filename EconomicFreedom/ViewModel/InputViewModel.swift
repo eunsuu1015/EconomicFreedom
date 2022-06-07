@@ -10,7 +10,7 @@ import Foundation
 //import RxRelay
 
 struct  InputViewModel {
-    let input: Input
+    var input: Input
     
     init(input: Input) {
         self.input = input
@@ -20,37 +20,58 @@ struct  InputViewModel {
         self.input = Input()
     }
     
-    var capital: Decimal {
-        return input.capital
+    var capital: String {
+        get {
+            return decimalToString(input.capital)
+        }
+        set {
+            input.capital = stringToDecimal(newValue)
+        }
     }
     
-    var capitalText: String {
-        return decimalToString(input.capital)
+    var saving: String {
+        get {
+            return decimalToString(input.saving)
+        }
+        set {
+            input.saving = stringToDecimal(newValue)
+        }
     }
     
-    var saving: Decimal {
-        return input.saving
-    }
-    
-    var savingText: String {
-        return decimalToString(input.saving)
-    }
-    
-    var invest: Double {
-        return input.invest
+    var invest: String {
+        get {
+        return String(input.invest)
+        }
+        set {
+            input.invest = Double(newValue)!
+        }
     }
     
     var tax: Tax {
-        return input.tax
+        get {
+            return input.tax
+        }
+        set {
+            input.tax = newValue
+        }
     }
     
-    var age: Int {
-        return input.age
+    var age: String {
+        get {
+            return String(input.age)
+        }
+        set {
+            input.age = Int(newValue)!
+        }
     }
     
-    var retireAge: Int {
-        return input.retireAge
+    var retireAge: String {
+        get {
+            return String(input.retireAge)
+        }
+        set {
+            input.retireAge = Int(newValue)!
+        }
     }
-    
     
 }

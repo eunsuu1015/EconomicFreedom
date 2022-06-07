@@ -8,16 +8,25 @@
 import Foundation
 import UIKit
 
-// MARK: - Decimal
+// MARK: - Decimal <-> String
 
+/// Decimal -> String
 func decimalToString(_ decimal: Decimal) -> String {
     return String(describing: decimal)
 }
 
-func stringToDecimal(_ text: String) -> Decimal {
-    return Decimal(string: text) ?? 0
+/// Decimal -> Decimal Style String
+func decimalToDecimalString(_ decimal: Decimal) -> String {
+    return String(describing: decimal)
 }
 
+/// String -> Decimal
+func stringToDecimal(_ text: String) -> Decimal {
+    let txt = text.replacingOccurrences(of: ",", with: "")
+    return Decimal(string: txt) ?? 0
+}
+
+/// String -> Decimal Style String
 func stringToDecimalString(_ text: String) -> String {
     return text.setDecimalStyle(st: text)
 }

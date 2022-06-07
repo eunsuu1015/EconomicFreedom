@@ -53,10 +53,11 @@ class InputVC: UIViewController {
         initLayout()
         initColorTheme()
     }
-    
+        
     override func viewWillAppear(_ animated: Bool) {
-
+        // initColorTheme()
     }
+    
     
     override func viewDidAppear(_ animated: Bool) {
         // underline 길이 때문에 didAppear에서 진행해야 함
@@ -69,7 +70,6 @@ class InputVC: UIViewController {
     func initLayout() {
         makeCircles(views: btnCapitalQuestion, btnSavingQuestion, btnInvestQuestion, btnMonthQuestion)
         
-        topView.viewRound.cornerRadius(TOP_VIEW_RADIUS)
         btnOk.cornerRadius(VIEW_RADIUS)
         makeCornerRadius(radius: BTN_TAX_RADIUS, views: btnTaxGeneral, btnTaxFree, btnTaxPreferential)
     }
@@ -77,8 +77,6 @@ class InputVC: UIViewController {
     func initColorTheme() {
         let normalColor = ColorTheme.shared.normalColor
         btnOk.backgroundColor = normalColor
-        topView.viewRound.backgroundColor = normalColor
-        topView.viewSqure.backgroundColor = normalColor
         
         setTaxBtn(select: .general)
         changeTabbar()
@@ -267,7 +265,18 @@ class InputVC: UIViewController {
             return
         }
         
+        inputViewModel.capital = tfCapital.text!
+        inputViewModel.saving = tfSaving.text!
+        inputViewModel.invest = tfInvest.text!
+        inputViewModel.tax = tax
+        inputViewModel.age = tfAge.text!
+        inputViewModel.retireAge = tfRetreatAge.text!
+        
         // 결과 화면으로 이동
+        let storyboard = self.storyboard
+        guard let resultVC = storyboard?.instantiateViewController(withIdentifier: "ResultVC") as? ResultVC else { return }
+        resultVC.inputViewModel = inputViewModel
+        self.navigationController?.pushViewController(resultVC, animated: true)
         
     }
     

@@ -34,9 +34,6 @@ class MemoVC: UIViewController {
     
     // MARK: - Init
     
-    func initLayout() {
-        
-    }
     
     @IBAction func btnOkClick(_ sender: Any) {
         
