@@ -3,6 +3,7 @@
 //  EconomicFreedom
 //
 //  Created by EunSu on 2022/03/13.
+//
 
 import UIKit
 
@@ -10,7 +11,6 @@ class DialogVC: CommDialogVC {
     
     @IBOutlet weak var labelTitle: UILabel!
     @IBOutlet weak var labelContent: UILabel!
-<<<<<<< HEAD
     @IBOutlet weak var btnClose: UIButton!
     @IBOutlet weak var btnOneOk: UIButton!
     @IBOutlet weak var viewTwoBtn: UIView!
@@ -42,44 +42,6 @@ class DialogVC: CommDialogVC {
         print("dismiss")
 //        dismiss(animated: false, completion: nil)
         dismiss()
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        initLayout()
-    }
-
-    override func viewWillAppear(_ animated: Bool) {
-        startOpenAnimation()
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        startCloseAnimation()
-    }
-    
-    func initLayout() {
-        self.view.backgroundColor = .clear
-        labelTitle.text = title2
-        labelContent.text = content2
-    }
-
-    func close() {
-        dismiss(animated: false)
-    }
-    
-    
-    // MARK: - Button Event
-    
-    @IBAction func btnBgClick(_ sender: Any) {
-        close()
-    }
-    
-    @IBAction func btnCloseClick(_ sender: Any) {
-        close()
-    }
-    
-    @IBAction func btnOkClick(_ sender: Any) {
-        close()
     }
     
 }
