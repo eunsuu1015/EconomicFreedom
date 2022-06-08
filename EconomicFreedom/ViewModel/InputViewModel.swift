@@ -9,7 +9,7 @@ import Foundation
 //import RxSwift
 //import RxRelay
 
-struct  InputViewModel {
+struct InputViewModel {
     var input: Input
     
     init(input: Input) {
@@ -20,22 +20,39 @@ struct  InputViewModel {
         self.input = Input()
     }
     
+    init(capital: String, saving: String, invest: String, age: String, retreatAge: String) {
+        self.init()
+        self.capital = capital
+        self.saving = saving
+        self.invest = invest
+        self.age = age
+        self.retireAge = retreatAge
+    }
+    
     var capital: String {
         get {
-            return decimalToString(input.capital)
+            return decimalToDecimalString(input.capital)
         }
         set {
             input.capital = stringToDecimal(newValue)
         }
     }
     
+    var capitalDecimal: Decimal {
+        return input.capital
+    }
+    
     var saving: String {
         get {
-            return decimalToString(input.saving)
+            return decimalToDecimalString(input.saving)
         }
         set {
             input.saving = stringToDecimal(newValue)
         }
+    }
+    
+    var savingDeciml: Decimal {
+        return input.saving
     }
     
     var invest: String {
@@ -63,6 +80,10 @@ struct  InputViewModel {
         set {
             input.age = Int(newValue)!
         }
+    }
+    
+    var ageResult: String {
+            return "\(String(input.age))세에 퇴사 시"
     }
     
     var retireAge: String {

@@ -10,14 +10,16 @@ import Foundation
 
 // 결과 화면에서 계산한 결과
 struct ResultData {
-    var principal: String           // 원금합계
-    var interest: String            // 세전 이자
-    var tax: String                 // 이자과세
-    var capital: String             // 세후 총 자산
-    var cashflow: String            // 월 지축 가능액 (인플레이션 미적용)
-    var cashflowAdjusted: String    // 월 지출 가능액 (인플레이션 적용)
+    var principal: Decimal = 0           // 원금합계
+    var interest: Decimal = 0            // 세전 이자
+    var tax: Tax = .general              // 이자과세
+    var capital: Decimal = 0             // 세후 총 자산
+    var cashflow: Decimal = 0            // 월 지축 가능액 (인플레이션 미적용)
+    var cashflowAdjusted: Decimal = 0    // 월 지출 가능액 (인플레이션 적용)
     
-    init(principal: String, interest: String, tax: String, capital: String, cashflow: String, cashflowAdjusted: String) {
+    init() { }
+    
+    init(principal: Decimal, interest: Decimal, tax: Tax, capital: Decimal, cashflow: Decimal, cashflowAdjusted: Decimal) {
         self.principal = principal
         self.interest = interest
         self.tax = tax

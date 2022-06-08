@@ -36,13 +36,46 @@ class ResultVC: UIViewController {
     
     @IBOutlet weak var switchInflation: UISwitch!
     
+    @IBOutlet weak var topView: TopView!
+    
     var inputViewModel = InputViewModel()
+    
+    var arrXAge = Array<NSDecimalNumber>()
+    var arrYCapital = Array<NSDecimalNumber>()
+    var arrSaving = Array<NSDecimalNumber>()
+    var arrSum = Array<NSDecimalNumber>()
+    
+    // TODO: 일단 전 버전과 변수명 동일하게 맞춘 후 나중에 변경 예정
+    var interest = NSDecimalNumber(0.0)
+    var interestCapital = NSDecimalNumber(0.0)
+    var interestSaving = NSDecimalNumber(0.0)
+    var capitalPrincipal = NSDecimalNumber(0.0)
+    var capitalSumEveryYear = NSDecimalNumber(0.0)
+    
+    // 화면에 표시할 인플레이션 값
+    var strInflationAdjustedCashFlow = ""   // 인플레이션 적용
+    var strInflationCashFlow = ""   // 인플레이션 미적용
+    
+    var montyCashFlow = 0
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        labelAge.text = inputViewModel.age
+        initLayout()
+        initTopView()
+        labelAge.text = inputViewModel.ageResult
 
+        calc()
+    }
+    
+    func initLayout() {
+        makeCircles(views: btnSavingQuestion)
+    }
+    
+    func initTopView() {
+        topView.btnRight1.isHidden = true
+        topView.btnRight2.isHidden = true
     }
     
     // MARK: - Button Event
@@ -60,6 +93,7 @@ class ResultVC: UIViewController {
     }
     
     @IBAction func btnSavingQuestionClick(_ sender: Any) {
+        showDialog(title: "현금흐름/월", content: "자산의 4%만큼의 이자를 인출한다고 가정합니다.\n\n예를들어 현재 자산이 12억이라면, 1년에 4%인 4,800만원을 이자로 받을 수 있습니다.\n\n이를 12(월)로 나누면 400만원입니다.\n\n자산에서 인출을 하지 않고도 오로지 이자로만 월 400만원의 현금흐름이 발생하는 것입니다.\n\n자산이 줄어들지 않는다는 점, 이자에서 발생한 소득만으로도 생활할 수 있다는 점에서 일정 수준의 자산을 모았을 때, 우리는 경제적 자유를 이루고 회사로부터 자유로워질 수 있습니다.\n\n(인플레이션률은 매년 2%로 가정합니다.)")
     }
     
     @IBAction func btnSharedClick(_ sender: Any) {
@@ -70,4 +104,178 @@ class ResultVC: UIViewController {
     
     @IBAction func changeSwitchInflation(_ sender: Any) {
     }
+    
+    // MARK: - Calc
+    
+    // TODO: 일단 합치고 나중에 분리 필요
+    func calc() {
+        var invest_int = Double(inputViewModel.invest)!
+        var present_age_int = Int(inputViewModel.age)!
+        var retire_age_int = Int(inputViewModel.retireAge)!
+        var N = retire_age_int - present_age_int
+        var tax_double = inputViewModel.tax.getFloat()
+        
+        var dnCapital = NSDecimalNumber(decimal: inputViewModel.capitalDecimal)
+        var dnSaving = NSDecimalNumber(decimal: inputViewModel.savingDeciml)
+        
+        var capital_sum = dnCapital // 지금까지 모아둔 돈
+        var capital_principal = dnCapital   // 계산을 위한 연금 변수
+        var capital_sum_everyyear = NSDecimalNumber(0.0)    // n년 후 세후 capital snum을 위한 변수
+        
+        var decimal_principal = dnSaving    // 원금
+        var decimal_principal_everyyear = NSDecimalNumber(0.0)  // 원금
+        
+        var saving = dnSaving   // 저축액
+        var Sum_saving = NSDecimalNumber(0.0)   // 총 저축액
+        var saving_everyyear = saving   // n년 후 저축을 위한 변수 (그냥 월 저축액임)
+        var Sum_saving_everyyear = NSDecimalNumber(0.0) // n년 후 saving sum을 위한 변수
+        
+        var decimal_Real_sum = NSDecimalNumber(0.0) // 자산 총액 = 자산 - 세금
+        
+        var decimal_interest = NSDecimalNumber(0.0) // 세전 이자
+        var decimal_interest_capital = NSDecimalNumber(0)   // n년 후 세전 이자(자산)
+        var decimal_interest_saving = NSDecimalNumber(0)    // n년 후 세전 이자(저축액
+        
+        var decimal_tax = NSDecimalNumber(0)    // 이자과세
+        
+        var decimal_cashflow = NSDecimalNumber(0.0) // 월 지출 가능액
+        
+        var tmpInvest12 = NSDecimalNumber(value: 1 + 0.01 * invest_int / 12)
+        var tmp12 = NSDecimalNumber(12)
+        var tmpTax001 = NSDecimalNumber(value: 0.01 * tax_double)
+        
+        // 자산 월복리 계산
+        var i = 1
+        while i <= N * 12 {
+            capital_sum = capital_sum.multiplying(by: tmpInvest12)
+            
+            if i % 12 == 0 {
+                capital_sum_everyyear = capital_sum
+                
+                // 세전이자
+                decimal_interest_capital = capital_sum_everyyear.subtracting(capitalPrincipal)
+                // N년도 세금 공제 부분
+                decimal_interest_capital = decimal_interest_capital.multiplying(by: tmpTax001)
+                
+                capitalSumEveryYear = capital_sum_everyyear.subtracting(decimal_interest_capital)
+                
+                arrYCapital.append(capital_sum_everyyear)
+            }
+            
+            i += 1
+        }
+        
+        Log.d("저축액 총액 계산하기")
+        i = 1
+        while i <= N * 12 {
+            saving = saving.multiplying(by: tmpInvest12)
+            Sum_saving = Sum_saving.adding(saving)
+            
+            // N년마다의 sum saving 구해서 array에 넣기
+            if i % 12 == 0 {
+                Sum_saving_everyyear = Sum_saving
+                
+                decimal_principal_everyyear = decimal_principal_everyyear.adding(saving_everyyear.multiplying(by: tmp12))
+                
+                // 세전 이자
+                decimal_interest_saving = Sum_saving_everyyear.subtracting(decimal_principal_everyyear)
+                
+                // 이자 과세분
+                decimal_interest_saving = decimal_interest_saving.multiplying(by: tmpTax001)
+                
+                // Sum_saving_everyyear - 이제 과세분 = 세 후 saving
+                Sum_saving_everyyear = Sum_saving_everyyear.subtracting(decimal_interest_saving)
+                
+                arrSaving.append(Sum_saving_everyyear)
+            }
+            i += 1
+        }
+        
+        Log.d("for 끝")
+        
+        // 자산 총액
+        decimal_Real_sum = capital_sum.adding(Sum_saving)
+        
+        var tmpN12 = NSDecimalNumber(value: 12*N)
+        decimal_principal = decimal_principal.multiplying(by: tmpN12)
+        decimal_principal = decimal_principal.adding(capital_principal)
+        
+        decimal_tax = decimal_Real_sum.subtracting(decimal_principal)
+        decimal_tax = decimal_tax.multiplying(by: tmpTax001)
+        
+        // N세에 퇴사 시
+        
+        // decimal 소수점 없애기
+        
+        decimal_interest = decimal_Real_sum.subtracting(decimal_principal)  // 세전 이자
+        
+        decimal_Real_sum = decimal_Real_sum.subtracting(decimal_tax)    // 세금 공제 후 총 자산
+        
+        // --1) N년 후 총 자산
+        var formatted_decimal_Real_sum = decimalToString(decimal_Real_sum as Decimal)
+        // --2) 원금
+        var formatted_decimal_principal = decimalToString(decimal_principal as Decimal)
+        // --3) 세전 이자
+        var formatted_decimal_interest = decimalToString(decimal_interest as Decimal)
+        // --4) 이자 과세 title
+        
+        // --5) 이자 과세
+        var formatted_decimal_tax = decimalToString(decimal_tax as Decimal)
+        
+        // 5) 월 사용 가능액
+        var tmp2512 = NSDecimalNumber(value: 25*12)
+        decimal_cashflow = decimal_Real_sum.dividing(by: tmp2512)
+        var formatted_decimal_cashflow = decimalToString(decimal_cashflow as Decimal)
+        
+        var inflationAdjustedCashFlow = decimal_cashflow
+        var tmp1002 = NSDecimalNumber(value: 1 + 0.02)
+        
+        var k = 0
+        while k < N {
+            inflationAdjustedCashFlow = inflationAdjustedCashFlow.dividing(by: tmp1002)
+            k += 1
+        }
+        
+        strInflationAdjustedCashFlow = decimalToString(inflationAdjustedCashFlow as Decimal)
+        strInflationCashFlow = formatted_decimal_cashflow
+        
+        // array_sum 계산하기
+        var j = 0
+        while j < arrSaving.count {
+            let getSaving = arrSaving[j]
+            let getCapital = arrYCapital[j]
+            let capital_sum_result = getSaving.adding(getCapital)
+            arrSum.append(capital_sum_result)
+            j += 1
+        }
+        
+        // ***** 결과 계산 완료 *****
+        // TODO: 레이아웃 출력 및 DB 저장
+        
+        // tmp 임시
+        labelPrincipal.text = formatted_decimal_principal
+        labelInterest.text = formatted_decimal_interest
+        labelCapital.text = formatted_decimal_Real_sum
+        labelSaving.text = formatted_decimal_cashflow
+        
+    }
+    
+    
+    
+    
+    
+    // MARK: - Chart
+    
+}
+
+// MARK: - TopViewDelegate
+
+extension ResultVC: TopViewDelegate {
+    func btnleft1Click() {
+        dismiss(animated: true)
+    }
+    
+    func btnRight1Click() { }
+    
+    func btnRight2Click() { }
 }

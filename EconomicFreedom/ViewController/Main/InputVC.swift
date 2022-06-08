@@ -44,6 +44,8 @@ class InputVC: UIViewController {
     var btn = 0
     var inputViewModel = InputViewModel()
     
+    let isTestInputData = true
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -52,7 +54,14 @@ class InputVC: UIViewController {
         initTopView()
         initLayout()
         initColorTheme()
+        
+        if isTestInputData {
+            let vm = InputViewModel(capital: "10000000", saving: "1000000", invest: "7.5", age: "28", retreatAge: "45")
+            inputViewModelData(vm)
+        }
+        
     }
+    
         
     override func viewWillAppear(_ animated: Bool) {
         // initColorTheme()
@@ -305,10 +314,10 @@ class InputVC: UIViewController {
             showDialog(content: "퇴사 나이를 입력해주세요.")
             return true
         }
-        guard tfMonth.text?.count != 0 else {
-            showDialog(content: "목표 현금흐름/월을 입력해주세요.")
-            return true
-        }
+//        guard tfMonth.text?.count != 0 else {
+//            showDialog(content: "목표 현금흐름/월을 입력해주세요.")
+//            return true
+//        }
         return false
     }
     
@@ -342,6 +351,15 @@ class InputVC: UIViewController {
             }
         }
         return false
+    }
+    
+    /// TextField에 입력
+    func inputViewModelData(_ vm: InputViewModel) {
+        tfCapital.text = vm.capital
+        tfSaving.text = vm.saving
+        tfInvest.text = vm.invest
+        tfAge.text = vm.age
+        tfRetreatAge.text = vm.retireAge
     }
     
 }

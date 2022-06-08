@@ -17,7 +17,8 @@ func decimalToString(_ decimal: Decimal) -> String {
 
 /// Decimal -> Decimal Style String
 func decimalToDecimalString(_ decimal: Decimal) -> String {
-    return String(describing: decimal)
+    let text = String(describing: decimal)
+    return stringToDecimalString(text)
 }
 
 /// String -> Decimal
