@@ -12,12 +12,24 @@ import UIKit
 
 /// Decimal -> String
 func decimalToString(_ decimal: Decimal) -> String {
-    return String(describing: decimal)
+    let text = String(describing: decimal)
+    if text.contains(".") {
+        let arr = text.split(separator: ".")
+        return String(arr[0])
+    } else {
+        return text
+    }
 }
 
 /// Decimal -> Decimal Style String
 func decimalToDecimalString(_ decimal: Decimal) -> String {
     let text = String(describing: decimal)
+    if text.contains(".") {
+        let arr = text.split(separator: ".")
+        return stringToDecimalString(String(arr[0]))
+    } else {
+        return text
+    }
     return stringToDecimalString(text)
 }
 

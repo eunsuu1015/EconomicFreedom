@@ -74,6 +74,8 @@ class ResultVC: UIViewController {
     }
     
     func initTopView() {
+        topView.delegate = self
+        topView.btnLeft1.isHidden = false
         topView.btnRight1.isHidden = true
         topView.btnRight2.isHidden = true
     }
@@ -81,9 +83,12 @@ class ResultVC: UIViewController {
     // MARK: - Button Event
     
     @IBAction func btnAccumulateClick(_ sender: Any) {
+        let msg = "\(labelChartAge.text)를 기준으로 누적계산하시겠습니까?"
+//        showDialog(title: "알림", content: <#T##String#>)
     }
     
     @IBAction func btnBackClick(_ sender: Any) {
+        self.navigationController?.popViewController(animated: true)
     }
     
     @IBAction func btnCalcHistoryClick(_ sender: Any) {
@@ -100,9 +105,21 @@ class ResultVC: UIViewController {
     }
     
     @IBAction func btnShowTableClick(_ sender: Any) {
+        
+        let storyboard = self.storyboard
+        guard let resultVC = storyboard?.instantiateViewController(withIdentifier: "ResultTableVC") as? ResultTableVC else { return }
+//        resultVC.arrAge = arrXAge
+//        resultVC.arrSum = arrSum
+        self.navigationController?.pushViewController(resultVC, animated: true)
     }
     
     @IBAction func changeSwitchInflation(_ sender: Any) {
+        if switchInflation.isOn {
+            labelSaving.text = strInflationAdjustedCashFlow
+        } else {
+            labelSaving.text = strInflationCashFlow
+        }
+        
     }
     
     // MARK: - Calc
@@ -212,23 +229,23 @@ class ResultVC: UIViewController {
         decimal_Real_sum = decimal_Real_sum.subtracting(decimal_tax)    // 세금 공제 후 총 자산
         
         // --1) N년 후 총 자산
-        var formatted_decimal_Real_sum = decimalToString(decimal_Real_sum as Decimal)
+        let formatted_decimal_Real_sum = decimalToDecimalString(decimal_Real_sum as Decimal)
         // --2) 원금
-        var formatted_decimal_principal = decimalToString(decimal_principal as Decimal)
+        let formatted_decimal_principal = decimalToDecimalString(decimal_principal as Decimal)
         // --3) 세전 이자
-        var formatted_decimal_interest = decimalToString(decimal_interest as Decimal)
+        let formatted_decimal_interest = decimalToDecimalString(decimal_interest as Decimal)
         // --4) 이자 과세 title
         
         // --5) 이자 과세
-        var formatted_decimal_tax = decimalToString(decimal_tax as Decimal)
+        let formatted_decimal_tax = decimalToDecimalString(decimal_tax as Decimal)
         
         // 5) 월 사용 가능액
-        var tmp2512 = NSDecimalNumber(value: 25*12)
+        let tmp2512 = NSDecimalNumber(value: 25*12)
         decimal_cashflow = decimal_Real_sum.dividing(by: tmp2512)
-        var formatted_decimal_cashflow = decimalToString(decimal_cashflow as Decimal)
+        let formatted_decimal_cashflow = decimalToDecimalString(decimal_cashflow as Decimal)
         
         var inflationAdjustedCashFlow = decimal_cashflow
-        var tmp1002 = NSDecimalNumber(value: 1 + 0.02)
+        let tmp1002 = NSDecimalNumber(value: 1 + 0.02)
         
         var k = 0
         while k < N {
@@ -236,7 +253,7 @@ class ResultVC: UIViewController {
             k += 1
         }
         
-        strInflationAdjustedCashFlow = decimalToString(inflationAdjustedCashFlow as Decimal)
+        strInflationAdjustedCashFlow = decimalToDecimalString(inflationAdjustedCashFlow as Decimal)
         strInflationCashFlow = formatted_decimal_cashflow
         
         // array_sum 계산하기
@@ -251,16 +268,21 @@ class ResultVC: UIViewController {
         
         // ***** 결과 계산 완료 *****
         // TODO: 레이아웃 출력 및 DB 저장
-        
-        // tmp 임시
-        labelPrincipal.text = formatted_decimal_principal
-        labelInterest.text = formatted_decimal_interest
-        labelCapital.text = formatted_decimal_Real_sum
-        labelSaving.text = formatted_decimal_cashflow
+        setResultLayout(principal: formatted_decimal_principal, interest: formatted_decimal_interest, tax: formatted_decimal_tax, sumReal: formatted_decimal_Real_sum, cashFlow: formatted_decimal_cashflow)
         
     }
     
     
+    func setResultLayout(principal: String, interest: String, tax: String, sumReal: String, cashFlow: String) {
+        labelPrincipal.text = principal
+        labelInterest.text = interest
+        labelTax.text = tax
+        if tax != "0" {
+            labelTax.text = "-" + tax
+        }
+        labelCapital.text = sumReal
+        labelSaving.text = cashFlow
+    }
     
     
     
@@ -272,7 +294,7 @@ class ResultVC: UIViewController {
 
 extension ResultVC: TopViewDelegate {
     func btnleft1Click() {
-        dismiss(animated: true)
+        self.navigationController?.popViewController(animated: true)
     }
     
     func btnRight1Click() { }

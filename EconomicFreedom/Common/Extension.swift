@@ -39,6 +39,7 @@ extension UIViewController {
         present(dialog, animated: false, completion: nil)
     }
     
+    
     /// 토스트 메시지 출력
     /// - Parameter message: 출력할 메시지
     func showToast(_ message : String, duration: Double = 1.5) {
