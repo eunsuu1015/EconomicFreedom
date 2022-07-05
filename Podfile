@@ -6,6 +6,10 @@ target 'EconomicFreedom' do
   use_frameworks!
 
   pod 'IQKeyboardManagerSwift'
+  pod 'Charts'
+  pod 'KakaoSDKCommon'    # 필수 요소를 담은 공통 모듈
+  pod 'KakaoSDKLink'      # 메시지(카카오링크)
+  pod 'KakaoSDKTemplate'  # 메시지 템플릿 
 
   # Pods for EconomicFreedom
 

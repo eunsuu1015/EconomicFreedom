@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Charts
 
 class ResultVC: UIViewController {
     
@@ -37,10 +38,11 @@ class ResultVC: UIViewController {
     @IBOutlet weak var switchInflation: UISwitch!
     
     @IBOutlet weak var topView: TopView!
+    @IBOutlet weak var barChartView: BarChartView!
     
     var inputViewModel = InputViewModel()
     
-    var arrXAge = Array<NSDecimalNumber>()
+    var arrXAge = Array<String>()
     var arrYCapital = Array<NSDecimalNumber>()
     var arrSaving = Array<NSDecimalNumber>()
     var arrSum = Array<NSDecimalNumber>()
@@ -65,7 +67,7 @@ class ResultVC: UIViewController {
         initLayout()
         initTopView()
         labelAge.text = inputViewModel.ageResult
-
+        barChartView.delegate = self
         calc()
     }
     
@@ -107,9 +109,12 @@ class ResultVC: UIViewController {
     @IBAction func btnShowTableClick(_ sender: Any) {
         
         let storyboard = self.storyboard
-        guard let resultVC = storyboard?.instantiateViewController(withIdentifier: "ResultTableVC") as? ResultTableVC else { return }
-//        resultVC.arrAge = arrXAge
-//        resultVC.arrSum = arrSum
+        guard let resultVC = storyboard?.instantiateViewController(withIdentifier: "ResultTableVC") as? ResultTableVC else {
+            print("ResultTableVC 찾지 못함")
+            return
+        }
+        resultVC.arrAge = arrXAge
+        resultVC.arrSum = arrSum
         self.navigationController?.pushViewController(resultVC, animated: true)
     }
     
@@ -126,17 +131,17 @@ class ResultVC: UIViewController {
     
     // TODO: 일단 합치고 나중에 분리 필요
     func calc() {
-        var invest_int = Double(inputViewModel.invest)!
+        let invest_int = Double(inputViewModel.invest)!
         var present_age_int = Int(inputViewModel.age)!
-        var retire_age_int = Int(inputViewModel.retireAge)!
-        var N = retire_age_int - present_age_int
-        var tax_double = inputViewModel.tax.getFloat()
+        let retire_age_int = Int(inputViewModel.retireAge)!
+        let N = retire_age_int - present_age_int
+        let tax_double = inputViewModel.tax.getFloat()
         
-        var dnCapital = NSDecimalNumber(decimal: inputViewModel.capitalDecimal)
-        var dnSaving = NSDecimalNumber(decimal: inputViewModel.savingDeciml)
+        let dnCapital = NSDecimalNumber(decimal: inputViewModel.capitalDecimal)
+        let dnSaving = NSDecimalNumber(decimal: inputViewModel.savingDeciml)
         
         var capital_sum = dnCapital // 지금까지 모아둔 돈
-        var capital_principal = dnCapital   // 계산을 위한 연금 변수
+        let capital_principal = dnCapital   // 계산을 위한 연금 변수
         var capital_sum_everyyear = NSDecimalNumber(0.0)    // n년 후 세후 capital snum을 위한 변수
         
         var decimal_principal = dnSaving    // 원금
@@ -228,6 +233,11 @@ class ResultVC: UIViewController {
         
         decimal_Real_sum = decimal_Real_sum.subtracting(decimal_tax)    // 세금 공제 후 총 자산
         
+        print("decimal_Real_sum : \(decimal_Real_sum)")
+        print("decimal_principal : \(decimal_principal)")
+        print("decimal_interest : \(decimal_interest)")
+        print("decimal_tax : \(decimal_tax)")
+        
         // --1) N년 후 총 자산
         let formatted_decimal_Real_sum = decimalToDecimalString(decimal_Real_sum as Decimal)
         // --2) 원금
@@ -267,9 +277,36 @@ class ResultVC: UIViewController {
         }
         
         // ***** 결과 계산 완료 *****
-        // TODO: 레이아웃 출력 및 DB 저장
+        
         setResultLayout(principal: formatted_decimal_principal, interest: formatted_decimal_interest, tax: formatted_decimal_tax, sumReal: formatted_decimal_Real_sum, cashFlow: formatted_decimal_cashflow)
         
+        let resultData = ResultData(principal: decimal_principal as Decimal, interest: decimal_interest as Decimal, tax: decimal_tax as Decimal, capital: decimal_interest_capital as Decimal, cashflow: decimal_cashflow as Decimal, cashflowAdjusted: inflationAdjustedCashFlow as Decimal)
+        
+        // TODO: InputViewModel 변경 필요
+        let inputData = Input(capital: inputViewModel.capitalDecimal, saving: inputViewModel.savingDeciml, invest: Double(inputViewModel.invest)!, tax: inputViewModel.tax, age: Int(inputViewModel.age)!, retireAge: Int(inputViewModel.retireAge)!)
+        let calcData = CalcData(inputData: inputData, resultData: resultData, date: "")
+        
+        // TODO: DB 저장
+        
+        // 결과 다이얼로그 출력
+        
+        var arrayList = Array<NSDecimalNumber>()
+//        var j = present_age_int;
+//        var x = 1
+//        while j < present_age_int {
+//            arrayList.append(arrSum)
+//            j += 1
+//        }
+        
+        // 나이 계산
+        var l = present_age_int
+        while l < retire_age_int {
+            arrXAge.append("\(l+1)세")
+            l += 1
+        }
+        
+        setChartDataWithCount(count: arrXAge.count + 1)
+        // chart
     }
     
     
@@ -285,8 +322,86 @@ class ResultVC: UIViewController {
     }
     
     
-    
     // MARK: - Chart
+    
+    func setChartDataWithCount(count: Int) {
+        let xAxis = barChartView.xAxis
+        xAxis.labelFont = UIFont.systemFont(ofSize: 10)
+        xAxis.labelPosition = .bottom
+        xAxis.drawGridLinesEnabled = false
+        
+        switch arrXAge.count {
+        case 1, 2:
+            xAxis.labelCount = 2
+        case 3:
+            xAxis.labelCount = 3
+        case 4:
+            xAxis.labelCount = 4
+        case 8...:
+            xAxis.labelCount = 8
+        default:
+            xAxis.labelCount = arrXAge.count
+        }
+        
+        xAxis.enabled = true
+        if arrXAge.count == 1 {
+            barChartView.leftAxis.enabled = false
+        } else {
+            barChartView.leftAxis.enabled = true
+        }
+        
+        barChartView.rightAxis.enabled = false
+        barChartView.scaleXEnabled = false
+        barChartView.scaleYEnabled = false
+        
+        var yVals = Array<ChartDataEntry>()
+        var i = 0
+        while i < arrXAge.count {
+            var x = arrXAge[i]
+            x = x.replacingOccurrences(of: "세", with: "")
+            yVals.append(BarChartDataEntry(x: Double(x)!, y: Double(arrSum[i])))
+            i += 1
+        }
+        
+        var dataSet = BarChartDataSet(entries: yVals, label: "세후 총 자산/년")
+        // TODO: main color setting
+        dataSet.setColor(UIColor.red)
+        dataSet.formSize = 10
+        dataSet.drawValuesEnabled = false
+        
+        // y 포맷 형식 decimal 설정
+        let pFormatter = NumberFormatter()
+        pFormatter.numberStyle = .decimal
+        barChartView.leftAxis.valueFormatter = DefaultAxisValueFormatter(formatter: pFormatter)
+        barChartView.xAxis.granularity = 1
+        
+        barChartView.leftAxis.axisMinimum = 0
+        if arrXAge.count == 1 {
+            barChartView.xAxis.labelCount = 1
+            barChartView.barData?.barWidth = 0.2
+            barChartView.leftAxis.enabled = true
+        } else if arrXAge.count == 2 {
+            barChartView.xAxis.labelCount = 2
+            barChartView.barData?.barWidth = 0.4
+        } else if arrXAge.count == 3 {
+            barChartView.xAxis.labelCount = 3
+            barChartView.barData?.barWidth = 0.5
+        } else if arrXAge.count == 4 {
+            barChartView.xAxis.labelCount = 4
+            barChartView.barData?.barWidth = 0.5
+        } else if arrXAge.count > 8 {
+            barChartView.xAxis.labelCount = 8
+        }
+        
+        let barData = BarChartData(dataSet: dataSet)
+        
+        barChartView.fitBars = true
+        barChartView.data = barData
+        
+        barChartView.animate(xAxisDuration: 1.0, yAxisDuration: 1.0)
+        
+        
+    }
     
 }
 
@@ -300,4 +415,20 @@ extension ResultVC: TopViewDelegate {
     func btnRight1Click() { }
     
     func btnRight2Click() { }
+}
+
+
+// MARK: - ChartViewDelegate
+
+extension ResultVC: ChartViewDelegate {
+    
+    /// 그래프 선택
+    func chartValueSelected(_ chartView: ChartViewBase, entry: ChartDataEntry, highlight: Highlight) {
+        
+    }
+    
+    /// 그래프 선택 해제
+    func chartValueNothingSelected(_ chartView: ChartViewBase) {
+        
+    }
 }

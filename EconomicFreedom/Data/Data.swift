@@ -12,14 +12,23 @@ import Foundation
 struct ResultData {
     var principal: Decimal = 0           // 원금합계
     var interest: Decimal = 0            // 세전 이자
-    var tax: Tax = .general              // 이자과세
+    var tax: Decimal = 0
     var capital: Decimal = 0             // 세후 총 자산
     var cashflow: Decimal = 0            // 월 지축 가능액 (인플레이션 미적용)
     var cashflowAdjusted: Decimal = 0    // 월 지출 가능액 (인플레이션 적용)
     
     init() { }
     
-    init(principal: Decimal, interest: Decimal, tax: Tax, capital: Decimal, cashflow: Decimal, cashflowAdjusted: Decimal) {
+//    init(principal: Decimal, interest: Decimal, tax: Tax, capital: Decimal, cashflow: Decimal, cashflowAdjusted: Decimal) {
+//        self.principal = principal
+//        self.interest = interest
+//        self.tax = tax
+//        self.capital = capital
+//        self.cashflow = cashflow
+//        self.cashflowAdjusted = cashflowAdjusted
+//    }
+    
+    init(principal: Decimal, interest: Decimal, tax: Decimal, capital: Decimal, cashflow: Decimal, cashflowAdjusted: Decimal) {
         self.principal = principal
         self.interest = interest
         self.tax = tax

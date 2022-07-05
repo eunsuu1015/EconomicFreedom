@@ -862,6 +862,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="ojC-Vj-CMQ"/>
                     <connections>
+                        <outlet property="barChartView" destination="1WI-mu-9Vl" id="x6H-15-Izp"/>
                         <outlet property="btnAccumulate" destination="QWp-Dn-nUj" id="G1T-QM-xNl"/>
                         <outlet property="btnChart" destination="EHu-Bg-cRx" id="lFh-lc-03h"/>
                         <outlet property="btnResult" destination="jmO-3A-ptK" id="P1J-i2-dC7"/>
@@ -1353,7 +1354,7 @@
         <!--Result TableVC-->
         <scene sceneID="C3e-Gb-PRo">
             <objects>
-                <viewController storyboardIdentifier="ResultTableVC" id="XEV-3I-jxy" customClass="ResultTableVC" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ResultTableVC" id="XEV-3I-jxy" customClass="ResultTableVC" customModule="EconomicFreedom" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="3FS-Oc-aHU">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1397,19 +1398,12 @@
                                     <constraint firstItem="aj7-8I-TyX" firstAttribute="centerY" secondItem="IbG-Hp-czf" secondAttribute="centerY" id="s4X-If-o1D"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ggv-9B-Zjb">
-                                <rect key="frame" x="0.0" y="170" width="414" height="1"/>
-                                <color key="backgroundColor" systemColor="systemGray5Color"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="1" id="DFC-MS-S6G"/>
-                                </constraints>
-                            </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="7fV-LV-o6b">
                                 <rect key="frame" x="0.0" y="170" width="414" height="622"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <connections>
-                                    <outlet property="dataSource" destination="XEV-3I-jxy" id="MK8-A9-vDO"/>
-                                    <outlet property="delegate" destination="XEV-3I-jxy" id="eTr-Y9-CB1"/>
+                                    <outlet property="dataSource" destination="XEV-3I-jxy" id="5ub-VK-ZS1"/>
+                                    <outlet property="delegate" destination="XEV-3I-jxy" id="8bd-zi-BWK"/>
                                 </connections>
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VKe-nQ-xwd" customClass="TopView" customModule="EconomicFreedom" customModuleProvider="target">
@@ -1417,6 +1411,13 @@
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="120" id="Uwg-vL-O4J"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ggv-9B-Zjb">
+                                <rect key="frame" x="0.0" y="170" width="414" height="1"/>
+                                <color key="backgroundColor" systemColor="systemGray5Color"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="1" id="DFC-MS-S6G"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -1440,7 +1441,8 @@
                     </view>
                     <navigationItem key="navigationItem" id="bvI-8T-EK8"/>
                     <connections>
-                        <outlet property="tableView" destination="7fV-LV-o6b" id="wz4-D6-u3u"/>
+                        <outlet property="tableView" destination="7fV-LV-o6b" id="ger-3u-KBA"/>
+                        <outlet property="topView" destination="VKe-nQ-xwd" id="6D8-M3-wES"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Kky-UN-GFB" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

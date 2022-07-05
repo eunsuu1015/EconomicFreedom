@@ -25,12 +25,13 @@ func decimalToString(_ decimal: Decimal) -> String {
 func decimalToDecimalString(_ decimal: Decimal) -> String {
     let text = String(describing: decimal)
     if text.contains(".") {
+        print("contain .")
         let arr = text.split(separator: ".")
         return stringToDecimalString(String(arr[0]))
     } else {
-        return text
+        print("contain . else ")
+        return stringToDecimalString(text)
     }
-    return stringToDecimalString(text)
 }
 
 /// String -> Decimal
